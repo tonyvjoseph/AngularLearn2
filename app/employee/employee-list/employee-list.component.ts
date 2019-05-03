@@ -67,6 +67,7 @@ export class EmployeeListComponent implements OnInit {
         ];
     }
 
+    //// Input property example
     //// Passing Data from nested to container component
     //// Component Input and Output properties
     //// Custom events using EventEmitter class
@@ -89,5 +90,21 @@ export class EmployeeListComponent implements OnInit {
 
     getTotalFemaleEmployeesCount(){
         return this.employees3.filter(e=>e.gender==="Female").length;
+    }
+
+    //// Output property example And Custom event example
+
+    // This property keeps track of which radio button is selected
+    // We have set the default value to All, so all the employees are displayed in the table by default
+    selectedEmployeeCountRadioButton="All"
+
+    // A Method to call, when the custom event(countRadioButtonSelectionChanged) inside the child component(Employee-count.component) is raised
+    // The event binding is specified in employee-list.component.html
+    // This is the Event handler method
+    //onEmployeeCountRadioButtonChange(selectedRadioButtonValue:string):void{
+    //OR
+    onEmployeeCountRadioButtonChange(selectedRadioButtonValue){
+        this.selectedEmployeeCountRadioButton=selectedRadioButtonValue;
+        // This property(selectedEmployeeCountRadioButton) is then used along with *ngIf structural directive to decide which employee objects to display in the table.
     }
 }

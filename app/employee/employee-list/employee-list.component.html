@@ -92,10 +92,12 @@
 <span>Passing Data from Nested component to Container component</span><br>
 <span>Component Input and Output properties</span><br>
 <span>Custom events using EventEmitter class</span><br>
+<span>"ng-container" example</span>
 <br>
 <app-employee-count [all]="getTotalEmployeesCount()"
                     [male]="getTotalMaleEmployeesCount()"
                     [female]="getTotalFemaleEmployeesCount()"
+                    (countRadioButtonSelectionChanged)="onEmployeeCountRadioButtonChange($event)"
 ></app-employee-count>
 <table>
   <thead>
@@ -109,7 +111,8 @@
       </tr>
   </thead>
   <tbody>
-        <tr *ngFor="let employee of employees3">
+      <ng-container *ngFor="let employee of employees3" >
+        <tr *ngIf="selectedEmployeeCountRadioButton=='All' || selectedEmployeeCountRadioButton==employee.gender">
             <td>{{employee.code | uppercase}}</td>
             <td>{{employee.name}}</td>
             <td>{{employee.name | EmpTitle:employee.gender}}</td>
@@ -117,5 +120,6 @@
             <td>{{employee.annualSalary | currency:'USD':true:'1.2-3'}}</td>
             <td>{{employee.dateOfBirth | date:"dd/MM/y" | uppercase}}</td>
         </tr>
+    </ng-container>
   </tbody>
 </table>
