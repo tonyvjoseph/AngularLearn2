@@ -1,14 +1,34 @@
 import { Component, OnInit } from '@angular/core';
+//// Interface
+import { IEmployee } from '../employee';
+//// Angular services
+import{EmployeeService} from '../employee-service';
+
 
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
-  styleUrls: ['./employee-list.component.css']
+  styleUrls: ['./employee-list.component.css'],
+  //// Register EmployeeService in this component by declaring it in the providers array
+  //// we have to register our service with angular dependency injection system
+  //// Here we have to provide our service class. We can register more than one service.
+  providers: [EmployeeService]
 })
 
 export class EmployeeListComponent implements OnInit {
-    ngOnInit() {
-    }
+
+    //// Interface example
+    employees4: IEmployee[];
+
+
+    //// Angular services example
+    //private _employeeService:EmployeeService;
+
+    // constructor(_emplyoeeService:EmployeeService){
+    //     this._employeeService=_emplyoeeService;
+    // }
+    employees5:IEmployee[];
+    
 
     ////*ngFor structural directive with an example
     employees = [
@@ -22,7 +42,18 @@ export class EmployeeListComponent implements OnInit {
     employees1: any[];
     employees2: any[];
 
-    constructor() { 
+    //// Angular services 
+    //// _emplyoeeService used for angular service
+    //// This is called dependency injection
+    //// When an instance of employee-list-component is created, then angular dependency injection system
+    //// will automaticaly inject an instance of EmployeeService into constructor.
+    //// Inject EmployeeService using the constructor
+    //// The private variable _employeeService which points to EmployeeService singelton instance 
+    //// is then available throughout this class
+    constructor(private _emplyoeeService:EmployeeService) { 
+        
+        //// Angular services 
+        //this.employees5=this._emplyoeeService.getEmployees();
 
         ////*ngFor trackBy with an example
         this.employees1 = [
@@ -39,6 +70,25 @@ export class EmployeeListComponent implements OnInit {
             { code: 'emp103', name: 'Mike', gender: 'Male', annualSalary: 5900, dateOfBirth: '12/8/1979' },
             { code: 'emp104', name: 'Mary', gender: 'Female', annualSalary: 6500.826, dateOfBirth: '10/14/1980' },
         ];
+
+        //// Interface example
+        this.employees4 = [
+            { code: 'emp101', name: 'Tom', gender: 'Male', annualSalary: 5500, dateOfBirth: '06/25/1988' },
+            { code: 'emp102', name: 'Alex', gender: 'Male', annualSalary: 5700.95, dateOfBirth: '9/6/1982' },
+            { code: 'emp103', name: 'Mike', gender: 'Male', annualSalary: 5900, dateOfBirth: '12/8/1979' },
+            { code: 'emp104', name: 'Mary', gender: 'Female', annualSalary: 6500.826, dateOfBirth: '10/14/1980' },
+            { code: 'emp105', name: 'Nancy', gender: 'Female', annualSalary: 6700.826, dateOfBirth: '11/05/1982' },
+            { code: 'emp106', name: 'John', gender: 'Male', annualSalary: 7000, dateOfBirth: '07/15/1979' },
+        ];
+    }
+
+    //// ngOnInit will call after constructor only
+    //// Mainly used for component initialisation and service calls
+    ngOnInit() {
+        //// Angular services 
+        //this.employees5=this._emplyoeeService.getEmployees();
+        this._emplyoeeService.getEmployees()
+                            .subscribe(employeeData=>this.employees5=employeeData);
     }
 
     ////*ngFor trackBy with an example
@@ -107,4 +157,10 @@ export class EmployeeListComponent implements OnInit {
         this.selectedEmployeeCountRadioButton=selectedRadioButtonValue;
         // This property(selectedEmployeeCountRadioButton) is then used along with *ngIf structural directive to decide which employee objects to display in the table.
     }
+
+
+    
+
+    
+    
 }
