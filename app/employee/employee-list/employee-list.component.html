@@ -123,3 +123,36 @@
     </ng-container>
   </tbody>
 </table>
+
+<br><br>
+<span>Interface example</span><br>
+<span style="color: #369;">employees4: IEmployee[];</span>
+
+<br><br>
+<span>Angular services </span><br>
+<span>Injectable, @Injectable()</span><br>
+<span>providers: [EmployeeService]</span><br>
+<span>constructor(private _emplyoeeService:EmployeeService)</span>
+<span>ngOnInit() : ngOnInit will call after constructor. Mainly used for component initialisation and service calls</span>
+<table>
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Name - Custom Pipe</th>
+            <th>Gender</th>
+            <th>Annual Salary</th>
+            <th>Date of Birth</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let employee of employees5">
+            <td>{{employee.code | uppercase}}</td>
+            <td>{{employee.name}}</td>
+            <td>{{employee.name | EmpTitle:employee.gender}}</td>
+            <td>{{employee.gender}}</td>
+            <td>{{employee.annualSalary | currency:'USD':true:'1.2-3'}}</td>
+            <td>{{employee.dateOfBirth | date:"dd/MM/y" | uppercase}}</td>
+        </tr>
+    </tbody>
+</table>
