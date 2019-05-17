@@ -82,7 +82,7 @@
             <td>{{employee.dateOfBirth | date:"dd/MM/y" | uppercase}}</td>
         </tr>
         <tr *ngIf="!employees || employees2.length==0">
-            <td colspan="5">No employees to display</td>
+            <td colspan="7">No employees to display</td>
         </tr>
   </tbody>
 </table>
@@ -132,9 +132,16 @@
 <span>Angular services </span><br>
 <span>Injectable, @Injectable()</span><br>
 <span>providers: [EmployeeService]</span><br>
-<span>constructor(private _emplyoeeService:EmployeeService)</span>
-<span>ngOnInit() : ngOnInit will call after constructor. Mainly used for component initialisation and service calls</span>
-<table>
+<span>constructor(private _emplyoeeService:EmployeeService)</span><br>
+<span>ngOnInit() : ngOnInit will call after constructor. Mainly used for component initialisation and service calls</span><br>
+<span>Web API call from angular. </span><br>
+<span>HttpClientModule, HttpClient, Http Get, Observable, subscribe, </span>
+<br><br>
+<div>
+    <span style="color: #369; font-weight: bold">Total Employees from web api: </span>
+    <span style="font-weight: bold" *ngIf="employees5">{{getEmployeesCountFromWebAPI()}}</span>
+</div>
+ <table>
     <thead>
         <tr>
             <th>Code</th>
@@ -153,6 +160,12 @@
             <td>{{employee.gender}}</td>
             <td>{{employee.annualSalary | currency:'USD':true:'1.2-3'}}</td>
             <td>{{employee.dateOfBirth | date:"dd/MM/y" | uppercase}}</td>
+        </tr>
+        <tr *ngIf="!employees5">
+            <td colspan="6">Loading data, please wait...</td>
+        </tr>
+        <tr *ngIf="employees5 && employees5.length==0">
+            <td colspan="6">No employees to display</td>
         </tr>
     </tbody>
 </table>

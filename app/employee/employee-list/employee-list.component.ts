@@ -87,8 +87,17 @@ export class EmployeeListComponent implements OnInit {
     ngOnInit() {
         //// Angular services 
         //this.employees5=this._emplyoeeService.getEmployees();
+        
+        //// We cant bind Observable of IEmployee(getEmployees() method) directly to the IEmployee array object 'employees5'
+        //// An Observable can have many Observers (also called Subscribers).
+        //// Following is the Observer/Subscriber
         this._emplyoeeService.getEmployees()
                             .subscribe(employeeData=>this.employees5=employeeData);
+
+        //// Above we also specified call back method as a parametr to the subscribe method as a arrow function
+        //// Here employeeData receives the employees list and assign to the employees5.
+
+        
     }
 
     ////*ngFor trackBy with an example
@@ -158,8 +167,10 @@ export class EmployeeListComponent implements OnInit {
         // This property(selectedEmployeeCountRadioButton) is then used along with *ngIf structural directive to decide which employee objects to display in the table.
     }
 
-
-    
+    //// Web API call testing
+    getEmployeesCountFromWebAPI(){
+        return this.employees5.length;
+    }
 
     
     
