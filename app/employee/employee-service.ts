@@ -15,6 +15,8 @@ export class EmployeeService {
     //// Below code will create a contructor and a private variable at same time
     constructor(private _httpClient:HttpClient){}
 
+    //// Http get() method return Observable<Response>.
+    //// So, we have to set the return type of getEmployees() method to Observable<IEmployee[]> 
     getEmployees(): Observable<IEmployee[]>{
         // return [
         //     { code: 'emp101', name: 'Tom', gender: 'Male', annualSalary: 5500, dateOfBirth: '06/25/1988' },
@@ -25,6 +27,7 @@ export class EmployeeService {
         //     { code: 'emp106', name: 'John', gender: 'Male', annualSalary: 7000, dateOfBirth: '07/15/1979' },
         // ];
 
+        //// Converting the service response to IEmployee array.
         return this._httpClient.get<IEmployee[]>("http://localhost:50101/api/employee/GetEmployeeList");
     }
 }
